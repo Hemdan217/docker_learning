@@ -80,3 +80,55 @@ services:
     volumes:
       - /src:/app/src
 ```
+
+### Environment Variables in Docker
+
+#### 1. Dockerfile
+
+- Set environment variables using `ENV`:
+  ```dockerfile
+  ENV PORT=4000
+  EXPOSE $PORT
+  ```
+
+#### 2. Docker CLI Flags
+
+- Pass environment variables using `--env`:
+  ```bash
+  docker run --env PORT=4000 my_app
+  ```
+- Use an environment file with `--env-file`:
+  ```bash
+  docker run --env-file ./.env my_app
+  ```
+
+#### 3. Docker Compose
+
+- Define environment variables directly in `docker-compose.yml`:
+  ```yaml
+  services:
+    node_app:
+      environment:
+        - PORT=4000
+  ```
+- Use an `.env` file:
+  ```yaml
+  services:
+    node_app:
+      env_file:
+        - ./.env
+  ```
+
+### Environment-Specific Configurations
+
+- Use separate Compose files for different environments:
+
+  - `docker-compose.dev.yml`: Development configuration.
+  - `docker-compose.main.yml`: Main configuration.
+  - `docker-compose.prod.yml`: Production configuration.
+
+- Example command to use a specific configuration:
+  ```bash
+  docker-compose -f docker-compose.prod.yml up
+
+  ```

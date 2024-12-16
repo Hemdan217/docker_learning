@@ -6,4 +6,4 @@ services:
       - "6777:4000"
     build: .
     volumes:
-      - /src:/app/src
+      - /src:/app/src:ro
